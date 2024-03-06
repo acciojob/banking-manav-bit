@@ -61,23 +61,21 @@ this.minBalance=minBalance;
     }
     public void deposit(double amount) {
         //add amount to balance
-double b=getBalance();
-setBalance(b+amount);
+balance+=amount;
     }
 
     public void withdraw(double amount) throws Exception {
         // Remember to throw "Insufficient Balance" exception, if the remaining amount would be less than minimum balance
-if(amount>getBalance()){
+if(amount>balance){
     throw new Exception("Insufficient Balance");
 
 }
 
-double amountleft=getBalance()-amount;
-        if(amountleft<getMinBalance()){
+double amountleft=balance-amount;
+        if(amountleft<minBalance){
             throw new Exception("Insufficient Balance");
 }
-else{setBalance(amountleft);
+balance=amountleft;
 }
     }
 
-}
