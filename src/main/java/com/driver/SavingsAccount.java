@@ -44,7 +44,7 @@ setBalance(getBalance()-amount);
     public double getSimpleInterest(int years){
         // Return the final amount considering that bank gives simple interest on current amount
         double r=rate/100.0;
-double si=(getBalance()*r*years)/100;
+double si=(getBalance()*r*years);
 double amount=si+getBalance();
 return amount;
     }
