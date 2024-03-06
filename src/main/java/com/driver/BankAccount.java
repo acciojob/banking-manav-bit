@@ -40,33 +40,24 @@ this.name=name;
 this.minBalance=minBalance;
     }
 
-    public String generateAccountNumber(int digits, int sum) throws Exception {
-        // Validate inputs
-        if (digits <= 0 || sum < 0 || sum >= 9 * digits) {
-            throw new IllegalArgumentException("Invalid input parameters");
-        }
-
-        // Generate account number
-        Random random = new Random();
-        StringBuilder accountNumber = new StringBuilder();
-
-        int currentSum = 0;
-        for (int i = 0; i < digits; i++) {
-            int randomNumber = random.nextInt(10); // Generate a random digit between 0 and 9
-            // Ensure the last digit doesn't make the sum exceed the desired sum
-            if (i == digits - 1 && currentSum + randomNumber != sum) {
-                randomNumber = sum - currentSum;
-            }
-            currentSum += randomNumber;
-            accountNumber.append(randomNumber);
-        }
-
-        // Check if the sum matches the desired sum
-        if (currentSum == sum) {
-            return accountNumber.toString();
-        } else {
+    public static String generateAccountNumber(int digits, int sum) throws Exception {
+        if (digits < 1 || sum < 0 || sum > 9 * digits) {
             throw new Exception("Account Number can not be generated");
         }
+
+        int[] numbers = new int[digits];
+        for (int i = 0; i < digits - 1; i++) {
+            int randomDigit = new Random().nextInt(10);
+            numbers[i] = randomDigit;
+            sum -= randomDigit;
+        }
+        numbers[digits - 1] = sum;
+
+        StringBuilder accountNumber = new StringBuilder();
+        for (int num : numbers) {
+            accountNumber.append(num);
+        }
+        return accountNumber.toString();
     }
     public void deposit(double amount) {
         //add amount to balance
