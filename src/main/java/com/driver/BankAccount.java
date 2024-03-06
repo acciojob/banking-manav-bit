@@ -23,6 +23,9 @@ public class BankAccount {
         this.balance = balance;
     }
 
+
+
+    private double minBalance;
     public double getMinBalance() {
         return minBalance;
     }
@@ -30,8 +33,6 @@ public class BankAccount {
     public void setMinBalance(double minBalance) {
         this.minBalance = minBalance;
     }
-
-    private double minBalance;
 
     public BankAccount(String name, double balance, double minBalance) {
 this.balance=balance;
@@ -41,7 +42,7 @@ this.minBalance=minBalance;
 
     public String generateAccountNumber(int digits, int sum) throws Exception {
         // Validate inputs
-        if (digits <= 0 || sum < 0 || sum > 9 * digits) {
+        if (digits <= 0 || sum < 0 || sum >= 9 * digits) {
             throw new IllegalArgumentException("Invalid input parameters");
         }
 
@@ -79,13 +80,13 @@ if(amount>getBalance()){
     throw new Exception("Insufficient Balance");
 
 }
+
 double amountleft=getBalance()-amount;
-
-if(amountleft<getMinBalance()){
-    throw new Exception("Insufficient Balance");
-
+        if(amountleft<getMinBalance()){
+            throw new Exception("Insufficient Balance");
 }
-else{setBalance(getBalance()-amount);}
+else{setBalance(amountleft);
+}
     }
 
 }
